@@ -3,7 +3,6 @@ import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import {  PrismaClient } from 'prisma/generated/product/default';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -17,7 +16,6 @@ import {  PrismaClient } from 'prisma/generated/product/default';
         },
       },
     ]),
-    PrismaClient
   ],
   controllers: [ProductController],
   providers: [ProductService],
