@@ -1,6 +1,7 @@
 import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { Product, Category, PrismaClient } from 'prisma/generated/product';
+import {  Product, Category } from 'prisma/generated/product';
+import { PrismaClient } from '@prisma/client';
 import { MessagePattern } from '@nestjs/microservices';
 @Controller('product')
 export class ProductController {
