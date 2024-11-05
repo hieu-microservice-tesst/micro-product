@@ -5,7 +5,8 @@
       "src": "src/main.ts",
       "use": "@vercel/node",
       "config": {
-        "buildCommand": "prisma generate && nest build"
+        "buildCommand": "prisma generate && nest build",
+        "includeFiles": ["prisma/schema.prisma", "prisma/generated/**/*"]
       }
     }
   ],
