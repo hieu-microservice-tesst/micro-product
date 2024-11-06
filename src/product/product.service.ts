@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import {  Product, Category, PrismaClient } from 'prisma/generated/product';
+import { PrismaClient, Product, Category } from 'prisma/generated/product';
 
 @Injectable()
 export class ProductService {
@@ -19,18 +19,18 @@ export class ProductService {
   }
 
   async getProductById(id: number): Promise<Product | null> {
-    return this.prisma.product.findUnique({ where: { id } });
+    return this.prisma.product.findUnique({ where: { id: Number(id) } });
   }
 
   async updateProduct(id: number, data: Partial<Product>): Promise<Product> {
     return this.prisma.product.update({
-      where: { id },
+      where: { id: Number(id) },
       data,
     });
   }
 
   async deleteProduct(id: number): Promise<Product> {
-    return this.prisma.product.delete({ where: { id } });
+    return this.prisma.product.delete({ where: { id: Number(id) } });
   }
 
   // Category
@@ -43,17 +43,17 @@ export class ProductService {
   }
 
   async getCategoryById(id: number): Promise<Category | null> {
-    return this.prisma.category.findUnique({ where: { id } });
+    return this.prisma.category.findUnique({ where: { id: Number(id) } });
   }
 
   async updateCategory(id: number, data: Partial<Category>): Promise<Category> {
     return this.prisma.category.update({
-      where: { id },
+      where: { id: Number(id) },
       data,
     });
   }
 
   async deleteCategory(id: number): Promise<Category> {
-    return this.prisma.category.delete({ where: { id } });
+    return this.prisma.category.delete({ where: { id: Number(id) } });
   }
 }
