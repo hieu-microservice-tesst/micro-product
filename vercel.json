@@ -6,7 +6,10 @@
       "use": "@vercel/node",
       "config": {
         "buildCommand": "prisma generate && nest build",
-        "includeFiles": ["prisma/schema.prisma", "prisma/generated/**/*"]
+        "includeFiles": [
+          "prisma/schema.prisma",
+          "prisma/generated/**/*"
+        ]
       }
     }
   ],
@@ -14,7 +17,15 @@
     {
       "src": "/(.*)",
       "dest": "src/main.ts",
-      "methods": ["GET", "POST", "PUT", "DELETE"]
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ]
     }
-  ]
+  ],
+  "env": {
+    "PRODUCT_DATABASE_URL": "postgresql://postgres:vunguyen024@localhost:5432/product_db?schema=public"
+  }
 }
