@@ -165,17 +165,16 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "POSTGRES_PRISMA_URL",
+        "fromEnvVar": "PRODUCT_PRISMA_URL",
         "value": null
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/product\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"POSTGRES_PRISMA_URL\") // uses connection pooling\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel Product {\n  id          Int      @id @default(autoincrement())\n  name        String\n  price       Float\n  stock       Int      @default(0)\n  description String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  categoryId Int?\n  category   Category? @relation(fields: [categoryId], references: [id])\n}\n\nmodel Category {\n  id       Int       @id @default(autoincrement())\n  name     String    @unique\n  products Product[]\n}\n",
-  "inlineSchemaHash": "b078a4b2b95f1880524abec3f2719277279b3563a162195299bbee54b297e7e1",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/product\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"PRODUCT_PRISMA_URL\") // uses connection pooling\n  directUrl = env(\"PRODUCT_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel Product {\n  id          Int      @id @default(autoincrement())\n  name        String\n  price       Float\n  stock       Int      @default(0)\n  description String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  categoryId Int?\n  category   Category? @relation(fields: [categoryId], references: [id])\n}\n\nmodel Category {\n  id       Int       @id @default(autoincrement())\n  name     String    @unique\n  products Product[]\n}\n",
+  "inlineSchemaHash": "bff923680a8b1fa52972c34603c9f191ebd479f38c70da9bb635f141a2921271",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -186,7 +185,7 @@ config.engineWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    POSTGRES_PRISMA_URL: typeof globalThis !== 'undefined' && globalThis['POSTGRES_PRISMA_URL'] || typeof process !== 'undefined' && process.env && process.env.POSTGRES_PRISMA_URL || undefined
+    PRODUCT_PRISMA_URL: typeof globalThis !== 'undefined' && globalThis['PRODUCT_PRISMA_URL'] || typeof process !== 'undefined' && process.env && process.env.PRODUCT_PRISMA_URL || undefined
   }
 })
 
