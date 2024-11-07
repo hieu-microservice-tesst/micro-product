@@ -168,13 +168,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "PRODUCT_PRISMA_URL",
+        "fromEnvVar": "PRODUCT_DATABASE_URL",
         "value": null
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/product\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"PRODUCT_PRISMA_URL\") // uses connection pooling\n  directUrl = env(\"PRODUCT_URL_NON_POOLING\") // uses a direct connection\n}\n\nmodel Product {\n  id          Int      @id @default(autoincrement())\n  name        String\n  price       Float\n  stock       Int      @default(0)\n  description String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  categoryId Int?\n  category   Category? @relation(fields: [categoryId], references: [id])\n}\n\nmodel Category {\n  id       Int       @id @default(autoincrement())\n  name     String    @unique\n  products Product[]\n}\n",
-  "inlineSchemaHash": "bff923680a8b1fa52972c34603c9f191ebd479f38c70da9bb635f141a2921271",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/product\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"PRODUCT_DATABASE_URL\")\n}\n\nmodel Product {\n  id          Int      @id @default(autoincrement())\n  name        String\n  price       Float\n  stock       Int      @default(0)\n  description String\n  createdAt   DateTime @default(now())\n  updatedAt   DateTime @updatedAt\n\n  categoryId Int?\n  category   Category? @relation(fields: [categoryId], references: [id])\n}\n\nmodel Category {\n  id       Int       @id @default(autoincrement())\n  name     String    @unique\n  products Product[]\n}\n",
+  "inlineSchemaHash": "71c12f365af77bb72edecbcded1eb573cb01d3d9a29c83776d150d8ab0c97d1b",
   "copyEngine": true
 }
 config.dirname = '/'
@@ -185,7 +185,7 @@ config.engineWasm = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    PRODUCT_PRISMA_URL: typeof globalThis !== 'undefined' && globalThis['PRODUCT_PRISMA_URL'] || typeof process !== 'undefined' && process.env && process.env.PRODUCT_PRISMA_URL || undefined
+    PRODUCT_DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['PRODUCT_DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.PRODUCT_DATABASE_URL || undefined
   }
 })
 
