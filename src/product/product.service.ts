@@ -33,7 +33,6 @@ export class ProductService {
     return this.prisma.product.delete({ where: { id: Number(id) } });
   }
 
-  // Category
   async createCategory(data: { name: string }): Promise<Category> {
     return this.prisma.category.create({ data });
   }
