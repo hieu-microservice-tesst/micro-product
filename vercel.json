@@ -24,8 +24,5 @@
         "DELETE"
       ]
     }
-  ],
-  "env": {
-    "PRODUCT_DATABASE_URL": "postgresql://postgres:vunguyen024@localhost:5432/product_db"
-  }
+  ]
 }
