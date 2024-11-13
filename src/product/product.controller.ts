@@ -2,6 +2,7 @@ import { Controller, Post, Body, Get, Param, Put, Delete } from '@nestjs/common'
 import { ProductService } from './product.service';
 import { Product, Category, PrismaClient } from 'prisma/generated/product';
 import { MessagePattern } from '@nestjs/microservices';
+import { EventPattern, Payload, Ctx, RmqContext } from '@nestjs/microservices';
 @Controller('product')
 export class ProductController {
   constructor(private productService: ProductService) {}
@@ -32,8 +33,8 @@ export class ProductController {
     return this.productService.deleteProduct(id);
   }
   @MessagePattern({ cmd: 'get_product' })
-  async getProduct(data: { id: number }) {
-    return await this.productService.getProductById(data.id);
+  async getProduct(@Payload() data: any, @Ctx() context: RmqContext) {
+    return await this.productService.getProductById(Number(data));
   }
   // Category
   @Post('category')
